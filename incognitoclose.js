@@ -123,8 +123,8 @@ function tick() {
 
     //we are at the end, close everything
     if (timer.elapsed > settings.timeout) {
-        //clearNotification();
-        //closeAllIncognito();
+        clearNotification();
+        closeAllIncognito();
         return;
     }
 
