@@ -1,0 +1,30 @@
+{
+    "manifest_version":2,
+
+    "name":"Incognito close",
+    "description":"This extension will close all your incognito windows after a certain timeout",
+    "version":"1.0",
+
+    "permissions":["tabs","activeTab", "webNavigation", "notifications"],
+
+    "background":{
+        "scripts":["core.js", "incognitoclose.js"],
+        "persistent":false
+
+    },
+    "browser_action": {
+        "default_name": "Auto close",
+        "default_icon": {
+          "19": "cross-24.png"}
+
+    },
+    "content_scripts":[
+        {
+            "matches":["http://*/*"],
+            "js":["content.js"],
+            "run_at":"document_end",
+            "all_frames":true
+        }
+    ]
+
+}
