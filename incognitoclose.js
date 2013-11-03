@@ -1,7 +1,7 @@
 var DEFAULT_INTERVAL = 1000; //interval time in ms
 var DEFAULT_TIMEOUT_VALUE = 7000; //idle timeout in ms
-var DEFAULT_NOTIFICATION_VALUE = 3000; //time in ms when notification is displayed
-
+var DEFAULT_NOTIFICATION_VALUE = 5000; //time in ms when notification is displayed
+var DEFAULT_NO_COUNTDOWN_BADGE_TEXT = 'X';
 
 //help variables
 var settings = {}
@@ -16,7 +16,7 @@ function init() {
     settings.interval = DEFAULT_INTERVAL;
     settings.timeout = DEFAULT_TIMEOUT_VALUE;
     settings.notificationTimeout = DEFAULT_NOTIFICATION_VALUE;
-    chrome.browserAction.setBadgeText({"text":'X'});
+    chrome.browserAction.setBadgeText({"text":DEFAULT_NO_COUNTDOWN_BADGE_TEXT});
 }
 
 //------------------------------------------------
@@ -71,6 +71,7 @@ function closeAllIncognito() {
 function reset() {
     console.log('reset time');
     timer.reset();
+    clearTimeout();
     chrome.browserAction.setBadgeText({"text":(DEFAULT_TIMEOUT_VALUE / 1000 << 0).toString()});
 }
 
@@ -125,6 +126,7 @@ function tick() {
     if (timer.elapsed > settings.timeout) {
         clearNotification();
         closeAllIncognito();
+        chrome.browserAction.setBadgeText({"text":DEFAULT_NO_COUNTDOWN_BADGE_TEXT});
         return;
     }
 
