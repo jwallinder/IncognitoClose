@@ -73,6 +73,7 @@ function reset() {
     timer.reset();
     clearTimeout();
     chrome.browserAction.setBadgeText({"text":(DEFAULT_TIMEOUT_VALUE / 1000 << 0).toString()});
+    clearNotification();
 }
 
 chrome.tabs.onUpdated.addListener(function (tabId, info, tab) {
